@@ -282,16 +282,25 @@ class Channels(object):
         for channel in self._channels:
             channel['subdivision'] = self._subdivisions.subdivision(channel['subdivision']);
 
+    @staticmethod
+    def pad_str(s, max_len)->str:
+        if len(s) > max_len:
+            return s[:max_len] + '.'
+        else:
+            n = max_len - len(s)
+            return s + ''.join([char * n for char in ' '])
+
+
     def channel_list(self) -> list:
         ch_list = []
         for channel in self._channels:
             if channel['stream']['url'] == 'N/A':
                 continue
             ch = '{}\t{}\t{}\t{}\t{}'.format(
-                    channel['name'], 
-                    channel['categories'][0]['name'],
-                    channel['languages'][0]['name'],
-                    channel['country']['name'], 
+                    Channels.pad_str(channel['name'], 24),#49
+                    Channels.pad_str(channel['categories'][0]['name'], 13),
+                    Channels.pad_str(channel['languages'][0]['name'], 16),
+                    Channels.pad_str(channel['country']['name'], 16), 
                     channel['stream']['url'],
                     )
             ch_list.append(ch)
