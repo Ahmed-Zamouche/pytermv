@@ -338,13 +338,15 @@ channels = Channels(args.cache_dir + '/' + 'channels_all.json')
 
 mpv_args='{}{}'.format('-f ' if args.full_screen else '', '-s ' if args.term_swallow else '')
 
+SCRIPT_DIRNAME = os.path.dirname(os.path.abspath(__file__))
+
 fzf = FzfPrompt()
 channel = fzf.prompt(
         channels.channel_list(),
         '-e -i --reverse --cycle --with-nth="1..-2" {} {} {} {} {}'.format(
-            '--bind "alt-]:execute-silent(./player.sh -b ' + mpv_args + ' {})"',
-            '--bind "enter:execute(./player.sh ' + mpv_args + ' {})"',
-            '--bind "double-click:execute(./player.sh ' + mpv_args + '{})"',
+            '--bind "alt-]:execute-silent('+SCRIPT_DIRNAME+'/player.sh -b ' + mpv_args + ' {})"',
+            '--bind "enter:execute('+SCRIPT_DIRNAME+'/player.sh ' + mpv_args + ' {})"',
+            '--bind "double-click:execute('+SCRIPT_DIRNAME+'/player.sh ' + mpv_args + '{})"',
             '--header="Select channel (press Escape to exit)"',
             '-q ""'
             )
