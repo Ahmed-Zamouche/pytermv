@@ -36,22 +36,35 @@ Text at the bottom of help
 
 ## Installation
 
-### Direct download
+### Using installer
 
 ```sh
-mkdir -p ${HOME}/.local/bin
-pip3 install pyfzf
-sudo wget -O ${HOME}/.local/bin/pytermv.py -q --show-progress https://raw.githubusercontent.com/Ahmed-Zamouche/pytermv/main/pytermv.py && sudo chmod +x ${HOME}/.local/bin/pytermv.py
-sudo wget -O ${HOME}/.local/bin/player.sh -q --show-progress https://raw.githubusercontent.com/Ahmed-Zamouche/pytermv/main/player.sh && sudo chmod +x ${HOME}/.local/bin/player.sh
-export PATH=${HOME}/.local/bin:$PATH
+curl -sLf https://raw.githubusercontent.com/Ahmed-Zamouche/pytermv/main/install.sh | bash -s -- -install
+
 ```
 
-
-### Installation by cloning the repository
+### Cloning the repository
 
 ```sh
-git clone https://github.com/Ahmed-Zamouche/pytermv.git "${HOME}/.pytermv"
-export PATH=${HOME}/.pytermv:$PATH
+git clone https://github.com/Ahmed-Zamouche/pytermv.git "$HOME"/.pytermv
+echo "PATH=\"\$HOME/.pytermv:\$PATH\"" >> "$HOME"/.bashrc
+source "$HOME"/.bashrc 
+```
+
+## Uninstallation
+
+### Using installer
+
+```sh
+curl -sLf https://raw.githubusercontent.com/Ahmed-Zamouche/pytermv/main/install.sh | bash -s -- --uinstall
+
+```
+
+### Manualy 
+
+```sh
+rm -rf "$HOME"/.pytermv
+sed -i '/pytermv/d' "$HOME"/.bashrc
 ```
 
 ## Credits
