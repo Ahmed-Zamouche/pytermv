@@ -26,6 +26,7 @@ class Updater(object):
     
     @staticmethod
     def run(cache_dir):
+        print("Updating channels...")
         Updater('channels.json', cache_dir).update()
         Updater('streams.json', cache_dir).update()
         Updater('guides.json', cache_dir).update()
@@ -35,9 +36,11 @@ class Updater(object):
         Updater('subdivisions.json', cache_dir).update()
         Updater('regions.json', cache_dir).update()
         Updater('blocklist.json', cache_dir).update()
+        print("Updating channels done")
 
     @staticmethod
     def merge(cache_dir):
+        print("Mergin channels info (This will take a while)...")
         channels = Channels( cache_dir + '/' + 'channels.json')
         channels.streams =  Streams( cache_dir + '/' + 'streams.json')
         channels.guides= Guides( cache_dir + '/' + 'guides.json')
@@ -48,6 +51,7 @@ class Updater(object):
         #regions = Regions( cache_dir + '/' + 'regions.json')
         #blocklist = Blocklist( cache_dir + '/' + 'blocklist.json')
         channels.dump( cache_dir + '/' + 'channels_all.json')
+        print("Mergin channels info done")
     
 class Streams(object):
 
